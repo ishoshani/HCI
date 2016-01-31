@@ -2,6 +2,7 @@
 <vxml version="2.1">
 <form id = "start">
 	<block>
+		<!-- Block For Declaring Variables, so that we only reset them at the start of the game -->
 			<var name="key" expr="false"/>
 	</block>
 <field name="begin">
@@ -54,7 +55,7 @@
 		<prompt>
 			Dresser Desc
 		</prompt>
-		<assign name="key" expr="true"/>
+		<assign name="key" expr="true">
 		<goto next="#firstRoom"/>
 	</if>
 	<if cond="look1=='Door'">
