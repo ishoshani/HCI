@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1">
+<form id = "start">
+	<block>
+			<var name="key" expr="false"/>
+	</block>
+<field name="begin">
+	<prompt>
+		Welcome to this game. Please say <emphasis> start </emphasis> to begin
+	</prompt>
+	<grammar type = "application/srgs+xml" root="start_root" mode="voice">
+	<rule id="start_root">
+		<one-of>
+		<item> start </item>
+		</one-of>
+	</rule>
+</grammar>
+<filled>
+	<prompt>
+		Let us begin
+	</prompt>
+	<goto next="#firstRoom"/>
+</filled>
+</field>
+</form>
+<form id = "firstRoom">
+<block>
+	<prompt>
+		description one.
+	</prompt>
+</block>
+
+<field name = "look1">
+	<prompt>
+		Choose one of the following: Window, Dresser, Door
+	</prompt>
+	<grammar name="Room1" type = "application/srgs+xml" root="Room1" mode="voice">
+	<rule id="Room1">
+		<one-of>
+		<item> Window </item>
+		<item> Dresser </item>
+		<item> Door </item>
+		</one-of>
+	</rule>
+</grammar>
+<filled>
+	<if cond="look1=='Window'">
+		<prompt>
+			Window Description
+		</prompt>
+		<goto next="#firstRoom"/>
+	</if>
+	<if cond="look1=='Dresser'">
+		<prompt>
+			Dresser Desc
+		</prompt>
+		<assign name="key" expr="true"/>
+		<goto next="#firstRoom"/>
+	</if>
+	<if cond="look1=='Door'">
+		<if cond="key=='false'">
+			<prompt>
+			Door Locked Description
+			</prompt>
+			<goto next="#firstRoom"/>
+		</if>
+		<prompt>
+			Door Unlock Description
+		</prompt>
+		<goto next="#secondRoom"/>
+	</if>
+</filled>
+</field>
+</form>
+<form id="secondRoom">
+	<block>
+		<prompt>
+			Description 2
+		</prompt>
+	</block>
+</form>
+</vxml>
