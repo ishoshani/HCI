@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1">
+<form id = "start">
+	<block>
+		<!-- Block For Declaring Variables, so that we only reset them at the start of the game -->
+			<var name="key" expr="false"/>
+	</block>
+<field name="begin">
+	<prompt>
+		<emphasis> Your </emphasis> very own adventure is about to unfold!! Please say <emphasis> start </emphasis> to begin
+	</prompt>
+	<grammar type = "application/srgs+xml" root="start_root" mode="voice">
+	<rule id="start_root">
+		<one-of>
+		<item> start </item>
+		</one-of>
+	</rule>
+</grammar>
+<filled>
+	<prompt>
+		Cool. Let us set off!
+	</prompt>
+	<goto next="#firstRoom"/>
+</filled>
+</field>
+</form>
+
+<form id = "firstRoom">
+<block>
+	<var name="flag" expr="false">
+	<prompt>
+		You are trapped in a room!
+	</prompt>
+</block>
+<field name = "look1">
+	<prompt>
+		Choose one of the following: Window, Dresser, Door
+	</prompt>
+	<grammar name="Room1" type = "application/srgs+xml" root="Room1" mode="voice">
+	<rule id="Room1">
+		<one-of>
+		<item> Window </item>
+		<item> Dresser </item>
+		<item> Door </item>
+		</one-of>
+	</rule>
+</grammar>
+<filled>
+	<if cond="look1=='Window'">
+		<prompt>
+			You are 500 feet high! It is pitch black outside! This can't be the way out!
+		</prompt>
+		<goto next="#firstRoom"/>
+	</if>
+	<if cond="look1=='Dresser'">
+		<prompt>
+			Wow! There is a key in the dresser! Now who would have thought of that!
+		</prompt>
+		<assign name="key" expr="true"/>
+		<goto next="#firstRoom"/>
+	</if>
+	<if cond="look1=='Door'">
+		<if cond="key=='false'">
+			<prompt>
+			The door is locked and made of solid steel! You cannot possibly break it!
+			</prompt>
+			<goto next="#firstRoom"/>
+		</if>
+		<prompt>
+			The key fits! And the door is unlocked!
+		</prompt>
+		<goto next="#secondRoom"/>
+	</if>
+</filled>
+</field>
+</form>
+<form id="secondRoom">
+	<block>
+		<prompt>
+			And now, you are trapped in another room!
+		</prompt>
+	</block>
+</form>
+</vxml>
