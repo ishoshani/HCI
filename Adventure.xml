@@ -3,11 +3,12 @@
 <form id = "start">
 	<block>
 		<!-- Block For Declaring Variables, so that we only reset them at the start of the game -->
-			<var name="key" expr="false"/>
+
+
 	</block>
 <field name="begin">
 	<prompt>
-		<emphasis> Your </emphasis> very own adventure is about to unfold!! Please say <emphasis> start </emphasis> to begin
+		Your very own adventure is about to unfold!! Please say <emphasis> start </emphasis> to begin
 	</prompt>
 	<grammar type = "application/srgs+xml" root="start_root" mode="voice">
 	<rule id="start_root">
@@ -16,6 +17,17 @@
 		</one-of>
 	</rule>
 </grammar>
+
+<noinput>
+	I do not hear anything. Please talk again.
+	<reprompt/>
+</noinput>
+
+<nomatch>
+	I do not recognize that. Please try again.
+	<reprompt/>
+</nomatch>
+
 <filled>
 	<prompt>
 		Cool. Let us set off!
@@ -26,48 +38,49 @@
 </form>
 
 <form id = "firstRoom">
-<block>
-	<var name="flag" expr="false">
-	<prompt>
-		You are trapped in a room!
-	</prompt>
-</block>
+	<block>
+		<prompt>
+			You are trapped in a room! The door is locked! There is a window, a dresser and a hammer in the room.
+		</prompt>
+	</block>
 <field name = "look1">
 	<prompt>
-		Choose one of the following: Window, Dresser, Door
+		Choose one of the following: Window, Dresser, Hammer
 	</prompt>
 	<grammar name="Room1" type = "application/srgs+xml" root="Room1" mode="voice">
 	<rule id="Room1">
 		<one-of>
 		<item> Window </item>
 		<item> Dresser </item>
-		<item> Door </item>
+		<item> Hammer </item>
 		</one-of>
 	</rule>
 </grammar>
+
+<noinput>
+		I did not hear anything. Please talk again.
+	<reprompt/>
+</noinput>
+
+<nomatch>
+	I do not recognize that. Please try again.
+	<reprompt/>
+</nomatch>
+
 <filled>
 	<if cond="look1=='Window'">
 		<prompt>
 			You are 500 feet high! It is pitch black outside! This can't be the way out!
 		</prompt>
 		<goto next="#firstRoom"/>
-	</if>
-	<if cond="look1=='Dresser'">
+	<elseif cond="look1=='Dresser'"/>
 		<prompt>
-			Wow! There is a key in the dresser! Now who would have thought of that!
+			There is a key in the dresser! Now who would have thought of that! You take the key, open the door and exit this room!
 		</prompt>
-		<assign name="key" expr="true"/>
-		<goto next="#firstRoom"/>
-	</if>
-	<if cond="look1=='Door'">
-		<if cond="key=='false'">
-			<prompt>
-			The door is locked and made of solid steel! You cannot possibly break it!
-			</prompt>
-			<goto next="#firstRoom"/>
-		</if>
+		<goto next="#secondRoom"/>
+	<elseif cond="look1=='Hammer'"/>
 		<prompt>
-			The key fits! And the door is unlocked!
+		You take the hammer and smash a hole in the door! You exit the room through the hole!
 		</prompt>
 		<goto next="#secondRoom"/>
 	</if>
@@ -77,8 +90,54 @@
 <form id="secondRoom">
 	<block>
 		<prompt>
-			And now, you are trapped in another room!
+			And now, you are trapped in another room! A deep voice echoes: You had 2 chances in the previous room. But you get only 1 chance here. The right choice will set you free. The wrong choice either takes you back to the previous room or kills you. HO HO HO HO!!
+		</prompt>
+		<prompt>
+			In this room, there are just 3 buttons. No doors, no windows!!
 		</prompt>
 	</block>
+	<field name = "look2">
+		<prompt>
+			Choose one of the following: Red button, Green button, Yellow button
+		</prompt>
+		<grammar name="Room2" type = "application/srgs+xml" root="Room2" mode="voice">
+		<rule id="Room2">
+			<one-of>
+			<item> Red button </item>
+			<item> Green button </item>
+			<item> Yellow button </item>
+			</one-of>
+		</rule>
+	</grammar>
+
+	<noinput>
+			I did not hear anything. Please talk again.
+		<reprompt/>
+	</noinput>
+
+	<nomatch>
+		I do not recognize that. Please try again.
+		<reprompt/>
+	</nomatch>
+
+	<filled>
+		<if cond="look2=='Red button'">
+			<prompt>
+				Oh No! You are going back to the previous room!
+			</prompt>
+			<goto next="#firstRoom"/>
+		</if>
+		<if cond="look2=='Green button'">
+			<prompt>
+				BOOOOOOOOOOOOOOOOOOOMMMM! The whole place explodes and you are dead. A sad end to this thrilling adventure! Thank you for playing!
+			</prompt>
+		</if>
+		<if cond="look2=='Yellow button'">
+			<prompt>
+				A secret panel opens up! You can smell the fresh air outside. You are free! The adventure is over. Thank you for playing!
+			</prompt>
+		</if>
+	</filled>
+</field>
 </form>
 </vxml>
