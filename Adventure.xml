@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vxml version="2.1">
+<property name="universals" value="help" />
 <form id = "start">
 	<block>
 		<!-- Block For Declaring Variables, so that we only reset them at the start of the game -->
@@ -28,6 +29,11 @@
 	I do not recognize that. Please try again.
 	<reprompt/>
 </nomatch>
+
+<help>
+	this game has a help feature in case you get stuck! Just say help to get a hint!
+	<reprompt/>
+</help>
 
 <filled>
 	<prompt>
@@ -71,6 +77,10 @@
 	I do not recognize that. Please try again.
 	<reprompt/>
 </nomatch>
+<help>
+	Say either Window, Closet, or Hammer to interact with these things. This first room is not too hard
+	<reprompt/>
+</help>
 
 <filled>
 	<if cond="look1=='Window'">
@@ -124,6 +134,11 @@
 		I do not recognize that. Please try again.
 		<reprompt/>
 	</nomatch>
+
+	<help>
+		I am thinking of Lemons and Bananas
+		<reprompt/>
+	</help>
 
 	<filled>
 		<if cond="look2=='Red'">
