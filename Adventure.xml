@@ -8,7 +8,8 @@
 	</block>
 <field name="begin">
 	<prompt>
-		Your very own adventure is about to unfold!! Please say <emphasis> start </emphasis> to begin
+		<break strength="weak" />Your
+		very own adventure is about to unfold!! Please say <emphasis> start </emphasis> to begin
 	</prompt>
 	<grammar type = "application/srgs+xml" root="start_root" mode="voice">
 	<rule id="start_root">
@@ -40,18 +41,22 @@
 <form id = "firstRoom">
 	<block>
 		<prompt>
-			You are trapped in a room! The door is locked! There is a window, a dresser and a hammer in the room.
+			You are trapped in a room! The door is locked! There is a window,
+			<break strength="weak" />
+			a closet
+			<break strength="weak" />
+			 and a hammer in the room.
 		</prompt>
 	</block>
 <field name = "look1">
 	<prompt>
-		Choose one of the following: Window, Dresser, Hammer
+		Choose one of the following: Window, Closet, Hammer
 	</prompt>
 	<grammar name="Room1" type = "application/srgs+xml" root="Room1" mode="voice">
 	<rule id="Room1">
 		<one-of>
 		<item> Window </item>
-		<item> Dresser </item>
+		<item> Closet </item>
 		<item> Hammer </item>
 		</one-of>
 	</rule>
@@ -73,9 +78,9 @@
 			You are 500 feet high! It is pitch black outside! This can't be the way out!
 		</prompt>
 		<goto next="#firstRoom"/>
-	<elseif cond="look1=='Dresser'"/>
+	<elseif cond="look1=='Closet'"/>
 		<prompt>
-			There is a key in the dresser! Now who would have thought of that! You take the key, open the door and exit this room!
+			There is a key in the closet! Now who would have thought of that! You take the key, open the door and exit this room!
 		</prompt>
 		<goto next="#secondRoom"/>
 	<elseif cond="look1=='Hammer'"/>
@@ -90,7 +95,7 @@
 <form id="secondRoom">
 	<block>
 		<prompt>
-			And now, you are trapped in another room! A deep voice echoes: You had 2 chances in the previous room. But you get only 1 chance here. The right choice will set you free. The wrong choice either takes you back to the previous room or kills you. HO HO HO HO!!
+			And now, you are trapped in another room! A deep voice echoes: You had 2 chances in the previous room. But you get only 1 chance here. The right choice will set you free. The wrong choice either takes you back to the previous room or kills you.
 		</prompt>
 		<prompt>
 			In this room, there are just 3 buttons. No doors, no windows!!
@@ -98,14 +103,14 @@
 	</block>
 	<field name = "look2">
 		<prompt>
-			Choose one of the following: Red button, Green button, Yellow button
+			Choose one of the following: Red, Green, Yellow
 		</prompt>
 		<grammar name="Room2" type = "application/srgs+xml" root="Room2" mode="voice">
 		<rule id="Room2">
 			<one-of>
-			<item> Red button </item>
-			<item> Green button </item>
-			<item> Yellow button </item>
+			<item> Red </item>
+			<item> Green </item>
+			<item> Yellow </item>
 			</one-of>
 		</rule>
 	</grammar>
@@ -121,18 +126,18 @@
 	</nomatch>
 
 	<filled>
-		<if cond="look2=='Red button'">
+		<if cond="look2=='Red'">
 			<prompt>
 				Oh No! You are going back to the previous room!
 			</prompt>
 			<goto next="#firstRoom"/>
 		</if>
-		<if cond="look2=='Green button'">
+		<if cond="look2=='Green'">
 			<prompt>
 				BOOOOOOOOOOOOOOOOOOOMMMM! The whole place explodes and you are dead. A sad end to this thrilling adventure! Thank you for playing!
 			</prompt>
 		</if>
-		<if cond="look2=='Yellow button'">
+		<if cond="look2=='Yellow'">
 			<prompt>
 				A secret panel opens up! You can smell the fresh air outside. You are free! The adventure is over. Thank you for playing!
 			</prompt>
