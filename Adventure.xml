@@ -9,8 +9,7 @@
 	</block>
 <field name="begin">
 	<prompt>
-		<break strength="weak" />Your
-		very own adventure is about to unfold!! Please say <emphasis> start </emphasis> to begin
+		<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/OpenPrompt.mp3" />
 	</prompt>
 	<grammar type = "application/srgs+xml" root="start_root" mode="voice">
 	<rule id="start_root">
@@ -21,23 +20,23 @@
 </grammar>
 
 <noinput>
-	I do not hear anything. Please talk again.
+	<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/NoInputPrompt.mp3" />
 	<reprompt/>
 </noinput>
 
 <nomatch>
-	I do not recognize that. Please try again.
+	<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/NoRecogPrompt.mp3" />
 	<reprompt/>
 </nomatch>
 
 <help>
-	this game has a help feature in case you get stuck! Just say help to get a hint!
+	<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/Hint1.mp3" />
 	<reprompt/>
 </help>
 
 <filled>
 	<prompt>
-		Cool. Let us set off!
+		<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/CoolPrompt.mp3" />
 	</prompt>
 	<goto next="#firstRoom"/>
 </filled>
@@ -47,16 +46,12 @@
 <form id = "firstRoom">
 	<block>
 		<prompt>
-			You are trapped in a room! The door is locked! There is a window,
-			<break strength="weak" />
-			a closet
-			<break strength="weak" />
-			 and a hammer in the room.
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/Room1Desc.mp3" />
 		</prompt>
 	</block>
 <field name = "look1">
 	<prompt>
-		Choose one of the following: Window, Closet, Hammer
+		<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/Room1Choice.mp3" />
 	</prompt>
 	<grammar name="Room1" type = "application/srgs+xml" root="Room1" mode="voice">
 	<rule id="Room1">
@@ -69,33 +64,33 @@
 </grammar>
 
 <noinput>
-		I did not hear anything. Please talk again.
+		<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/NoInputPrompt.mp3" />
 	<reprompt/>
 </noinput>
 
 <nomatch>
-	I do not recognize that. Please try again.
+	<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/NoRecogPrompt.mp3" />
 	<reprompt/>
 </nomatch>
 <help>
-	Say either Window, Closet, or Hammer to interact with these things. This first room is not too hard
+	<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/Room1Hint.mp3" />
 	<reprompt/>
 </help>
 
 <filled>
 	<if cond="look1=='Window'">
 		<prompt>
-			You are 500 feet high! It is pitch black outside! This can't be the way out!
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/WindowPrompt.mp3" />
 		</prompt>
 		<goto next="#firstRoom"/>
 	<elseif cond="look1=='Closet'"/>
 		<prompt>
-			There is a key in the closet! Now who would have thought of that! You take the key, open the door and exit this room!
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/ClosetPrompt.mp3" />
 		</prompt>
 		<goto next="#secondRoom"/>
 	<elseif cond="look1=='Hammer'"/>
 		<prompt>
-		You take the hammer and smash a hole in the door! You exit the room through the hole!
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/HammerPrompt.mp3" />
 		</prompt>
 		<goto next="#secondRoom"/>
 	</if>
@@ -105,15 +100,15 @@
 <form id="secondRoom">
 	<block>
 		<prompt>
-			And now, you are trapped in another room! A deep voice echoes: You had 2 chances in the previous room. But you get only 1 chance here. The right choice will set you free. The wrong choice either takes you back to the previous room or kills you.
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/Room2Desc.mp3" />
 		</prompt>
 		<prompt>
-			In this room, there are just 3 buttons. No doors, no windows!!
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/Room2Desc2.mp3" />
 		</prompt>
 	</block>
 	<field name = "look2">
 		<prompt>
-			Choose one of the following: Red, Green, Yellow
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/ButtonChoice.mp3" />
 		</prompt>
 		<grammar name="Room2" type = "application/srgs+xml" root="Room2" mode="voice">
 		<rule id="Room2">
@@ -126,38 +121,39 @@
 	</grammar>
 
 	<noinput>
-			I did not hear anything. Please talk again.
+			<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/NoInputPrompt.mp3" />
 		<reprompt/>
 	</noinput>
 
 	<nomatch>
-		I do not recognize that. Please try again.
+		<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/NoRecogPrompt.mp3" />
 		<reprompt/>
 	</nomatch>
 
 	<help>
-		I am thinking of Lemons and Bananas
+		<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/Room2Hint.mp3" />
 		<reprompt/>
 	</help>
 
 	<filled>
 		<if cond="look2=='Red'">
 			<prompt>
-				Oh No! You are going back to the previous room!
+				<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/RedPrompt.mp3" />
 			</prompt>
 			<goto next="#firstRoom"/>
 		</if>
 		<if cond="look2=='Green'">
 			<prompt>
-				BOOOOOOOOOOOOOOOOOOOMMMM! The whole place explodes and you are dead. A sad end to this thrilling adventure! Thank you for playing!
+				<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/GreenPrompt.mp3" />
 			</prompt>
 		</if>
 		<if cond="look2=='Yellow'">
 			<prompt>
-				A secret panel opens up! You can smell the fresh air outside. You are free! The adventure is over. Thank you for playing!
+				<audio src = "https://raw.githubusercontent.com/ishoshani/HCI/master/YellowPrompt.mp3" />
 			</prompt>
 		</if>
 	</filled>
 </field>
 </form>
 </vxml>
+
